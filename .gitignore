@@ -1,0 +1,5 @@
+#file ignore
+
+*.log
+.env
+node_modules
