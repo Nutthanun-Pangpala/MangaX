@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- เอฟเฟกต์แสงเรือง (Glow Filters) -->
+    <filter id="red-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur1" />
+      <feGaussianBlur stdDeviation="15" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="blade-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- ไล่เฉดสีโลหะเงิน (Metallic Chrome / Silver) -->
+    <linearGradient id="silver-bevel-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="35%" stop-color="#e2e8f0" />
+      <stop offset="70%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+
+    <linearGradient id="silver-bevel-dark" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748b" />
+      <stop offset="50%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <!-- ไล่เฉดสีคริสตัลแดงทับทิม (Ruby / Crimson Crystal) -->
+    <linearGradient id="ruby-crystal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3344" />
+      <stop offset="40%" stop-color="#e50914" />
+      <stop offset="80%" stop-color="#990000" />
+      <stop offset="100%" stop-color="#4a0005" />
+    </linearGradient>
+
+    <linearGradient id="ruby-facets" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff4d4d" />
+      <stop offset="60%" stop-color="#800000" />
+      <stop offset="100%" stop-color="#300000" />
+    </linearGradient>
+
+    <!-- ประกายดาบ (Katana Blade Gradient) -->
+    <linearGradient id="blade-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#ffccd0" />
+      <stop offset="100%" stop-color="#ff1a2a" />
+    </linearGradient>
+  </defs>
+
+  <!-- ================= 1. ประกายสายฟ้าแดง (Lightning Aura) ================= -->
+  <g stroke="#ff2a3b" stroke-width="2.5" fill="none" opacity="0.85" filter="url(#red-glow)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 230 140 L 210 100 L 230 90 L 195 40" />
+    <path d="M 120 220 L 70 210 L 90 190 L 40 170" />
+    <path d="M 260 360 L 290 410 L 270 425 L 305 470" />
+    <path d="M 390 280 L 440 295 L 420 315 L 470 335" />
+    <path d="M 330 120 L 370 80 L 350 70 L 390 30" />
+  </g>
+
+  <!-- ================= 2. ปีกขวาตัว X: คริสตัลสีแดงทับทิม ================= -->
+  <g id="ruby-right-wing">
+    <!-- ชิ้นส่วนขวาบน -->
+    <polygon points="265,225 365,90 445,90 325,250" fill="url(#ruby-crystal)" filter="url(#red-glow)" />
+    <!-- เหลี่ยมมิติแสงสะท้อนคริสตัล -->
+    <polygon points="265,225 365,90 335,90 250,235" fill="url(#ruby-facets)" opacity="0.7" />
+
+    <!-- ชิ้นส่วนขวาล่าง -->
+    <polygon points="305,280 445,410 365,410 245,295" fill="url(#ruby-crystal)" filter="url(#red-glow)" />
+    <!-- สันเหลี่ยมเงา -->
+    <polygon points="305,280 445,410 420,410 275,270" fill="url(#ruby-facets)" opacity="0.8" />
+  </g>
+
+  <!-- ================= 3. ปีกซ้ายตัว X: โลหะเงิน 3D (Chrome/Silver) ================= -->
+  <g id="silver-left-wing">
+    <!-- หน้าตัดด้านซ้าย (Facet สว่าง) -->
+    <polygon points="65,90 145,90 240,240 185,250" fill="url(#silver-bevel-left)" />
+    <!-- หน้าตัดสันเอียง (Facet มืด ให้มิติ Bevel) -->
+    <polygon points="145,90 230,225 240,240" fill="url(#silver-bevel-dark)" />
+
+    <!-- ขาล่างซ้าย -->
+    <polygon points="145,410 65,410 180,265 235,275" fill="url(#silver-bevel-left)" />
+    <polygon points="65,410 170,275 180,265" fill="url(#silver-bevel-dark)" />
+
+    <!-- ขอบเน้นแสงสีขาว (Edge Highlights) -->
+    <polyline points="65,90 145,90 240,240 180,265 65,410" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.9" />
+  </g>
+
+  <!-- ================= 4. รอยฟันคมดาบซามูไร (Katana Slash & Sparks) ================= -->
+  <!-- รอยฟันแสงดาบพาดกลางตัว X (Slash Beam) -->
+  <path d="M 45 425 Q 230 260 460 70" fill="none" stroke="#ffffff" stroke-width="4.5" filter="url(#blade-glow)" />
+  <path d="M 55 420 Q 235 260 450 78" fill="none" stroke="#ff2a3b" stroke-width="12" opacity="0.5" filter="url(#red-glow)" />
+
+  <!-- ตัวดาบคาตานะ (Katana Blade & Hilt) -->
+  <g transform="rotate(-37 250 250)">
+    <!-- ใบดาบโลหะ -->
+    <path d="M 100 248 L 380 247 Q 410 248 425 249 Q 390 252 100 252 Z" fill="url(#blade-gradient)" filter="url(#blade-glow)" />
+    <!-- สันดาบสีเงินสว่าง -->
+    <line x1="100" y1="248" x2="415" y2="248" stroke="#ffffff" stroke-width="2" />
+    <!-- กระบังดาบ (Tsuba) -->
+    <rect x="88" y="240" width="12" height="20" rx="3" fill="#1e293b" stroke="#e2e8f0" stroke-width="1.5" />
+    <!-- ด้ามดาบ (Tsuka) -->
+    <rect x="15" y="243" width="73" height="14" rx="2" fill="#800000" stroke="#111" stroke-width="1.5" />
+    <!-- ลายถักเชือกด้ามดาบ -->
+    <path d="M 25 243 L 32 257 M 40 243 L 47 257 M 55 243 L 62 257 M 70 243 L 77 257" stroke="#ffffff" stroke-width="1.8" opacity="0.8" />
+  </g>
+
+  <!-- จุดประกายระเบิดแสงกลางจุดตัด (Center Energy Flare) -->
+  <circle cx="250" cy="248" r="7" fill="#ffffff" filter="url(#blade-glow)" />
+  <circle cx="250" cy="248" r="18" fill="#ff1a2a" opacity="0.6" filter="url(#red-glow)" />
+
+  <!-- สะเก็ดไฟกระจาย (Sparks) -->
+  <g fill="#ff4d4d" filter="url(#red-glow)">
+    <circle cx="280" cy="220" r="3" />
+    <circle cx="215" cy="290" r="2.5" />
+    <circle cx="340" cy="180" r="3.5" />
+    <circle cx="170" cy="330" r="2" />
+    <circle cx="295" cy="275" r="3" />
+    <circle cx="190" cy="205" r="2.5" />
+    <circle cx="390" cy="140" r="2" />
+  </g>
+</svg>
