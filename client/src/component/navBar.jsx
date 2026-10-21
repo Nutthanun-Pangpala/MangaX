@@ -14,7 +14,7 @@ function NavBar() {
                         alt="MangaX logo"
                     />
                     <span className="self-center text-2xl font-black tracking-wide text-white">
-                        Manga<span className="text-red-600">X</span>
+                        Manga
                     </span>
                 </a>
 
