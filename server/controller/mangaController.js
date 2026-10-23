@@ -581,6 +581,7 @@ exports.getMangaById = async (req, res) => {
 
 exports.getChapterPages = async (req, res) => {
     const { chapterId } = req.params;
+    
 
     if (
         !chapterId ||
@@ -621,9 +622,7 @@ exports.getChapterPages = async (req, res) => {
         // MangaDex chapter
         // ======================================
 
-        const serverData = await mangaDexFetch(
-            `/at-home/server/${encodeURIComponent(chapterId)}`
-        );
+        const serverData = await getAtHomeServer(chapterId);
 
         const chapter = serverData?.chapter;
 
@@ -676,3 +675,54 @@ exports.getChapterPages = async (req, res) => {
         });
     }
 };
+
+async function getAtHomeServer(chapterId) {
+    let lastError;
+
+    for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+            const result = await mangaDexFetch(
+                `/at-home/server/${encodeURIComponent(chapterId)}`
+            );
+
+            const isValid =
+                typeof result?.baseUrl === 'string' &&
+                result.baseUrl.length > 0 &&
+                typeof result?.chapter?.hash === 'string' &&
+                result.chapter.hash.length > 0 &&
+                Array.isArray(result?.chapter?.data);
+
+            if (isValid) {
+                return result;
+            }
+
+            lastError = new Error(
+                'MangaDex returned an unexpected At-Home response'
+            );
+
+            console.warn('Invalid MangaDex At-Home response', {
+                attempt: attempt + 1,
+                result: result?.result,
+                keys: Object.keys(result || {}),
+                chapterKeys: Object.keys(result?.chapter || {}),
+            });
+        } catch (error) {
+            lastError = error;
+
+            console.warn('MangaDex At-Home request failed', {
+                attempt: attempt + 1,
+                message: error.message,
+                status: error.status || null,
+            });
+        }
+
+        if (attempt === 0) {
+            await new Promise(resolve => setTimeout(resolve, 300));
+        }
+    }
+
+    throw lastError || new Error(
+        'MangaDex At-Home request failed'
+    );
+}
+
