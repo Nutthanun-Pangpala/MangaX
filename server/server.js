@@ -1,18 +1,22 @@
 const express = require('express');
-const db = require('./db/db.js');
-const core = require('cors');
+const cors = require('cors');
 
-const mangaRouter = require('./routes/mangaRoute.js')
-
+const mangaRouter = require('./routes/mangaRoute.js');
 
 const app = express();
-app.use(core());
-app.use(express.json());
 
+app.use(cors());
+app.use(express.json());
 
 app.use('/api', mangaRouter);
 
-app.listen(process.env.PORT,() => {
-    console.log('server is running on port '+ process.env.PORT)
-})
+module.exports = app;
 
+
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+        console.log(`MangaX server is running on port ${PORT}`);
+    });
+}
