@@ -623,37 +623,36 @@ exports.getChapterPages = async (req, res) => {
         // ======================================
 
         const serverData = await getAtHomeServer(chapterId);
+        const chapter = serverData.chapter;
 
-        const chapter = serverData?.chapter;
+        // ใช้ baseUrl ตามที่ MangaDex ส่งมาโดยตรง
+        const baseUrl = serverData.baseUrl.replace(/\/+$/, "");
+        const hash = chapter.hash;
 
-        if (
-            !serverData?.baseUrl ||
-            !chapter?.hash ||
-            !Array.isArray(chapter.data)
-        ) {
+        // ตรวจสอบว่ามีชื่อไฟล์ภาพ
+        const filenames = chapter.data;
+
+        if (!Array.isArray(filenames) || filenames.length === 0) {
             return res.status(502).json({
                 success: false,
-                message: 'ข้อมูลหน้าการ์ตูนจากเซิร์ฟเวอร์ไม่ถูกต้อง',
+                message: "ตอนนี้ไม่มีข้อมูลหน้าการ์ตูนจาก MangaDex",
             });
         }
 
-        const baseUrl = serverData.baseUrl.replace(/\/+$/, '');
-        const hash = encodeURIComponent(chapter.hash);
-
-        const pages = chapter.data.map((filename, index) => ({
+        const pages = filenames.map((filename, index) => ({
             id: `${chapterId}-${index + 1}`,
             chapter_id: chapterId,
             page_number: index + 1,
 
-            image_url:
-                `${baseUrl}/data/${hash}/${encodeURIComponent(filename)}`,
+            // สร้าง URL โดยใช้ baseUrl และชื่อไฟล์ต้นฉบับ
+            image_url: `${baseUrl}/data/${hash}/${filename}`,
 
             animated_panels: [],
         }));
 
         return res.json({
             success: true,
-            source: 'mangadex',
+            source: "mangadex",
             data: pages,
         });
     } catch (error) {
