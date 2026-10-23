@@ -1,86 +1,173 @@
 
-
-
-
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
-    return (
+    const currentYear = new Date().getFullYear();
 
-        <footer className="bg-neutral-primary-soft">
-            <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-                <div className="md:flex md:justify-between">
-                    <div className="mb-6 md:mb-0">
-                        <a href="http://localhost:5173/" className="flex items-center">
-                            <img src="/xicon.svg" className="h-7 me-3" alt="MangaX Logo" />
-                            <span className="self-center text-2xl font-black tracking-wide text-white">
-                                Manga<span className="text-red-600">X</span>
+    const categories = [
+        { name: 'Manga', path: '/?type=manga' },
+        { name: 'Manhwa', path: '/?type=manhwa' },
+        { name: 'Manhua', path: '/?type=manhua' },
+    ];
+
+    const exploreLinks = [
+        { name: 'หน้าแรก', path: '/' },
+        { name: 'ยอดนิยม', path: '/popular' },
+        { name: 'AI Motion', path: '/motion' },
+        { name: 'คอมมูนิตี้', path: '/community' },
+    ];
+
+    const socialLinks = [
+        {
+            name: 'GitHub',
+            href: 'https://github.com/Nutthanun-Pangpala/MangaX',
+            icon: (
+                <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 2a10 10 0 0 0-3.162 19.487c.5.092.682-.217.682-.48v-1.7c-2.782.605-3.369-1.177-3.369-1.177-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.607.069-.607 1.003.07 1.53 1.03 1.53 1.03.892 1.528 2.341 1.087 2.91.831.091-.646.35-1.087.636-1.337-2.22-.252-4.555-1.11-4.555-4.943 0-1.092.39-1.984 1.03-2.684-.104-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.99c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.7 1.028 1.592 1.028 2.684 0 3.842-2.339 4.688-4.566 4.936.36.31.68.92.68 1.855v2.596c0 .265.18.576.688.478A10 10 0 0 0 12 2Z"
+                />
+            ),
+        },
+    ];
+
+    const headingClass =
+        'mb-5 text-xs font-black uppercase tracking-[0.2em] text-white';
+
+    const linkClass =
+        'inline-flex items-center gap-2 text-sm text-neutral-400 transition-colors duration-200 hover:text-red-400';
+
+    return (
+        <footer className="relative mt-16 overflow-hidden border-t border-white/[0.08] bg-neutral-950 text-neutral-300">
+            {/* Decorative glow */}
+            <div className="pointer-events-none absolute -top-32 left-1/4 h-64 w-64 rounded-full bg-red-600/[0.08] blur-[100px]" />
+            <div className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-rose-600/[0.06] blur-[100px]" />
+
+            {/* Top accent */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500/70 to-transparent" />
+
+            <div className="relative mx-auto max-w-screen-2xl px-5 pb-6 pt-12 sm:px-8 lg:px-10 lg:pt-16">
+                <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-12">
+
+                    {/* Brand */}
+                    <div className="lg:col-span-5">
+                        <Link
+                            to="/"
+                            className="group inline-flex items-center gap-3"
+                            aria-label="MangaX หน้าแรก"
+                        >
+                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-red-500/25 bg-gradient-to-br from-red-500/15 to-rose-950/40 shadow-[0_0_25px_rgba(239,68,68,0.10)] transition-all duration-300 group-hover:border-red-500/60 group-hover:shadow-[0_0_30px_rgba(239,68,68,0.2)]">
+                                <img
+                                    src="/xicon.svg"
+                                    alt="MangaX Logo"
+                                    className="h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-110"
+                                />
+                            </div>
+
+                            <span className="text-3xl font-black tracking-tight text-white">
+                                Manga<span className="text-red-500">X</span>
                             </span>
-                        </a>
+                        </Link>
+
+                        <p className="mt-5 max-w-md text-sm leading-7 text-neutral-400">
+                            โลกของมังงะที่คุณชื่นชอบ รวม Manga, Manhwa และ Manhua
+                            พร้อมประสบการณ์การอ่านที่ออกแบบมาเพื่อคุณ
+                        </p>
+
+                        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-red-500/15 bg-red-500/[0.06] px-3 py-2">
+                            <span className="relative flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-60" />
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+                            </span>
+                            <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-red-300">
+                                Read beyond limits
+                            </span>
+                        </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                        <div>
-                            <h2 className="mb-6 text-sm font-semibold text-heading uppercase">Catagories</h2>
-                            <ul className="text-body font-medium">
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Manga</a>
+
+                    {/* Explore */}
+                    <div className="lg:col-span-2">
+                        <h2 className={headingClass}>Explore</h2>
+                        <ul className="space-y-4">
+                            {exploreLinks.map((item) => (
+                                <li key={item.path}>
+                                    <Link to={item.path} className={linkClass}>
+                                        <span className="text-red-500/70">›</span>
+                                        {item.name}
+                                    </Link>
                                 </li>
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Manhwa</a>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Categories */}
+                    <div className="lg:col-span-2">
+                        <h2 className={headingClass}>Categories</h2>
+                        <ul className="space-y-4">
+                            {categories.map((item) => (
+                                <li key={item.name}>
+                                    <Link to={item.path} className={linkClass}>
+                                        <span className="text-red-500/70">›</span>
+                                        {item.name}
+                                    </Link>
                                 </li>
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Manhua</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2 className="mb-6 text-sm font-semibold text-heading uppercase">Follow us</h2>
-                            <ul className="text-body font-medium">
-                                <li className="mb-4">
-                                    <a href="https://github.com/Nutthanun-Pangpala/MangaX.git" className="hover:underline ">Github</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="hover:underline">Discord</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2 className="mb-6 text-sm font-semibold text-heading uppercase">Legal</h2>
-                            <ul className="text-body font-medium">
-                                <li className="mb-4">
-                                    <a href="#" className="hover:underline">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="#" className="hover:underline">Terms &amp; Conditions</a>
-                                </li>
-                            </ul>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Community */}
+                    <div className="lg:col-span-3">
+                        <h2 className={headingClass}>Community</h2>
+                        <p className="mb-5 text-sm leading-6 text-neutral-400">
+                            ติดตามโปรเจกต์และร่วมพัฒนา MangaX ไปด้วยกัน
+                        </p>
+
+                        <div className="flex flex-wrap gap-3">
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.name}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={social.name}
+                                    title={social.name}
+                                    className="group flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-neutral-400 transition-all duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 hover:shadow-[0_5px_20px_rgba(239,68,68,0.10)]"
+                                >
+                                    <svg
+                                        className="h-5 w-5 fill-current transition-transform duration-300 group-hover:scale-110"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        {social.icon}
+                                    </svg>
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>
-                <hr className="my-6 border-default sm:mx-auto lg:my-8" />
-                <div className="sm:flex sm:items-center sm:justify-between">
-                    <span className="text-sm text-body sm:text-center">© 2026 <a class="hover:underline">MangaX</a>. All Rights Reserved.
-                    </span>
-                    <div className="flex mt-4 sm:justify-center sm:mt-0">
-                        <a href="#" className="text-body hover:text-heading">
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd" /></svg>
-                            <span className="sr-only">Facebook page</span>
-                        </a>
-                        <a href="#" className="text-body hover:text-heading ms-5">
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M18.942 5.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.586 11.586 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3 17.392 17.392 0 0 0-2.868 11.662 15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.638 10.638 0 0 1-1.706-.83c.143-.106.283-.217.418-.331a11.664 11.664 0 0 0 10.118 0c.137.114.277.225.418.331-.544.328-1.116.606-1.71.832a12.58 12.58 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM8.678 14.813a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.929 1.929 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z" /></svg>
-                            <span className="sr-only">Discord community</span>
-                        </a>
-                        <a href="#" className="text-body hover:text-heading ms-5">
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" /></svg>
-                            <span className="sr-only">Twitter page</span>
-                        </a>
-                        <a href="#" className="text-body hover:text-heading ms-5">
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.006 2a9.847 9.847 0 0 0-6.484 2.44 10.32 10.32 0 0 0-3.393 6.17 10.48 10.48 0 0 0 1.317 6.955 10.045 10.045 0 0 0 5.4 4.418c.504.095.683-.223.683-.494 0-.245-.01-1.052-.014-1.908-2.78.62-3.366-1.21-3.366-1.21a2.711 2.711 0 0 0-1.11-1.5c-.907-.637.07-.621.07-.621.317.044.62.163.885.346.266.183.487.426.647.71.135.253.318.476.538.655a2.079 2.079 0 0 0 2.37.196c.045-.52.27-1.006.635-1.37-2.219-.259-4.554-1.138-4.554-5.07a4.022 4.022 0 0 1 1.031-2.75 3.77 3.77 0 0 1 .096-2.713s.839-.275 2.749 1.05a9.26 9.26 0 0 1 5.004 0c1.906-1.325 2.74-1.05 2.74-1.05.37.858.406 1.828.101 2.713a4.017 4.017 0 0 1 1.029 2.75c0 3.939-2.339 4.805-4.564 5.058a2.471 2.471 0 0 1 .679 1.897c0 1.372-.012 2.477-.012 2.814 0 .272.18.592.687.492a10.05 10.05 0 0 0 5.388-4.421 10.473 10.473 0 0 0 1.313-6.948 10.32 10.32 0 0 0-3.39-6.165A9.847 9.847 0 0 0 12.007 2Z" clip-rule="evenodd" /></svg>
-                            <span className="sr-only">GitHub account</span>
-                        </a>
-                        <a href="#" className="text-body hover:text-heading ms-5">
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2a10 10 0 1 0 10 10A10.009 10.009 0 0 0 12 2Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.093 20.093 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM10 3.707a8.82 8.82 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.755 45.755 0 0 0 10 3.707Zm-6.358 6.555a8.57 8.57 0 0 1 4.73-5.981 53.99 53.99 0 0 1 3.168 4.941 32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.641 31.641 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM12 20.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 15.113 13a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd" /></svg>
-                            <span className="sr-only">Dribbble account</span>
-                        </a>
+
+                {/* Divider */}
+                <div className="my-10 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+                {/* Bottom bar */}
+                <div className="flex flex-col gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+                    <p className="text-xs leading-6 text-neutral-500">
+                        © {currentYear}{' '}
+                        <Link to="/" className="font-bold text-neutral-300 transition hover:text-red-400">
+                            MangaX
+                        </Link>
+                        . All rights reserved.
+                    </p>
+
+                    <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-neutral-500 sm:justify-end">
+                        <span className="transition-colors hover:text-neutral-300">
+                            Made for manga lovers
+                        </span>
+                        <span className="hidden h-1 w-1 rounded-full bg-red-500/70 sm:block" />
+                        <span className="font-medium tracking-wide">
+                            DARK <span className="text-red-500">MODE</span>
+                        </span>
                     </div>
                 </div>
             </div>
