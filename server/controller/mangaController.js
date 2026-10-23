@@ -657,10 +657,7 @@ exports.getChapterPages = async (req, res) => {
             data: pages,
         });
     } catch (error) {
-        console.error(
-            'getChapterPages error:',
-            error.message
-        );
+        console.error('getChapterPages error:', error);
 
         if (error.status === 404) {
             return res.status(404).json({
