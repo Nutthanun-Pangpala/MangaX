@@ -32,3 +32,5 @@ npm install
 nodemon server.js
 
 ```
+
+##https://manga-x.vercel.app
